@@ -61,6 +61,9 @@ RSpec.describe 'Task', type: :system do
 
   describe 'Task編集' do
     context '正常系' do
+      let(:project) {create(:project)}
+      let(:task) {create(:task)}
+
       xit 'Taskを編集した場合、一覧画面で編集後の内容が表示されること' do
         # FIXME: テストが失敗するので修正してください
         project = FactoryBot.create(:project)
@@ -75,8 +78,7 @@ RSpec.describe 'Task', type: :system do
 
       it 'ステータスを完了にした場合、Taskの完了日に今日の日付が登録されること' do
         # TODO: ローカル変数ではなく let を使用してください
-        project = FactoryBot.create(:project)
-        task = FactoryBot.create(:task, project_id: project.id)
+        
         visit edit_project_task_path(project, task)
         select 'done', from: 'Status'
         click_button 'Update Task'
