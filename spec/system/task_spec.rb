@@ -63,15 +63,13 @@ RSpec.describe 'Task', type: :system do
       let(:project) {create(:project)}
       let(:task) {create(:task)}
 
-      xit 'Taskを編集した場合、一覧画面で編集後の内容が表示されること' do
+      fit 'Taskを編集した場合、一覧画面で編集後の内容が表示されること' do
         # FIXME: テストが失敗するので修正してください
-        project = FactoryBot.create(:project)
-        task = FactoryBot.create(:task, project_id: project.id)
         visit edit_project_task_path(project, task)
         fill_in 'Deadline', with: Time.current
         click_button 'Update Task'
         click_link 'Back'
-        expect(find('.task_list')).to have_content(Time.current.strftime('%Y-%m-%d'))
+        expect(find('.task_list')).to have_content(Time.current.strftime('%-m/%d %-H:%M'))
         expect(current_path).to eq project_tasks_path(project)
       end
 
@@ -105,7 +103,7 @@ RSpec.describe 'Task', type: :system do
     let!(:task) { create(:task) }
 
       # FIXME: テストが失敗するので修正してください
-      fit 'Taskが削除されること' do
+      it 'Taskが削除されること' do
         visit project_tasks_path(project)
         click_link 'Destroy'
         page.driver.browser.switch_to.alert.accept
