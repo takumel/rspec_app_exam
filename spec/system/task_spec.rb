@@ -7,7 +7,6 @@ RSpec.describe 'Task', type: :system do
     context '正常系' do
       it '一覧ページにアクセスした場合、Taskが表示されること' do
         # TODO: ローカル変数ではなく let を使用してください
-        
         visit project_tasks_path(project)
         expect(page).to have_content task.title
         expect(Task.count).to eq 1
@@ -42,7 +41,7 @@ RSpec.describe 'Task', type: :system do
   end
 
   describe 'Task詳細' do
-    context '正常系' do      
+    context '正常系' do
       it 'Taskが表示されること' do
         # TODO: ローカル変数ではなく let を使用してください
         visit project_task_path(project, task)
@@ -68,7 +67,6 @@ RSpec.describe 'Task', type: :system do
 
       it 'ステータスを完了にした場合、Taskの完了日に今日の日付が登録されること' do
         # TODO: ローカル変数ではなく let を使用してください
-        
         visit edit_project_task_path(project, task)
         select 'done', from: 'Status'
         click_button 'Update Task'
